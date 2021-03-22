@@ -409,8 +409,8 @@ def main():
 
     index_file_path = os.path.join(OUTPUTDIR, "index.rst")
     index_file = open(index_file_path, "w")
-    index_file.write('juniper.device Ansible Modules\n')
-    index_file.write('=================================================\n')
+    index_file.write('juniper.device Ansible Collection Modules\n')
+    index_file.write('=========================================\n')
     index_file.write('\n')
     index_file.write('Contents:\n')
     index_file.write('\n')
