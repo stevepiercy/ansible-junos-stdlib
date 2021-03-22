@@ -1,0 +1,877 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>rpc &#8212; Junos Ansible Collection Modules 0.1.1 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ping" href="ping.html" />
+    <link rel="prev" title="juniper.device Ansible Collection Modules" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="ping.html" title="ping"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="juniper.device Ansible Collection Modules"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Junos Ansible Collection Modules 0.1.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">rpc</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="rpc">
+<span id="id1"></span><h1>rpc<a class="headerlink" href="#rpc" title="Permalink to this headline">¶</a></h1>
+<p>Execute one or more NETCONF RPCs on a Junos device</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#synopsis" id="id2">Synopsis</a></p></li>
+<li><p><a class="reference internal" href="#requirements" id="id3">Requirements</a></p></li>
+<li><p><a class="reference internal" href="#module-specific-options" id="id4">Module-specific Options</a></p></li>
+<li><p><a class="reference internal" href="#common-connection-related-options" id="id5">Common Connection-related Options</a></p></li>
+<li><p><a class="reference internal" href="#common-logging-related-options" id="id6">Common Logging-related Options</a></p></li>
+<li><p><a class="reference internal" href="#examples" id="id7">Examples</a></p></li>
+<li><p><a class="reference internal" href="#return-values" id="id8">Return Values</a></p></li>
+<li><p><a class="reference internal" href="#notes" id="id9">Notes</a></p>
+<ul>
+<li><p><a class="reference internal" href="#author" id="id10">Author</a></p></li>
+<li><p><a class="reference internal" href="#status" id="id11">Status</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="synopsis">
+<h2><a class="toc-backref" href="#id2">Synopsis</a><a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Execute one or more NETCONF RPCs on a Junos device.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">display</span> <span class="pre">xml</span> <span class="pre">rpc</span></code> modifier to determine the equivalent RPC name for a Junos CLI command.  For example, <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">version</span> <span class="pre">|</span> <span class="pre">display</span> <span class="pre">xml</span> <span class="pre">rpc</span></code> reveals the equivalent RPC name is <code class="docutils literal notranslate"><span class="pre">get-software-information</span></code>.</p></li>
+</ul>
+</div>
+<div class="section" id="requirements">
+<h2><a class="toc-backref" href="#id3">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>The following software packages must be installed on hosts that execute this module:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/Juniper/py-junos-eznc">junos-eznc</a> &gt;= 2.5.2</p></li>
+<li><p>Python &gt;= 3.5</p></li>
+</ul>
+</div>
+<div class="section" id="module-specific-options">
+<span id="module-specific-options-label"></span><h2><a class="toc-backref" href="#id4">Module-specific Options</a><a class="headerlink" href="#module-specific-options" title="Permalink to this headline">¶</a></h2>
+<p>The following options may be specified for this module:</p>
+<table border=1 cellpadding=4>
+
+<tr>
+<th class="head">parameter</th>
+<th class="head">type</th>
+<th class="head">required</th>
+<th class="head">default</th>
+<th class="head">choices</th>
+<th class="head">comments</th>
+</tr>
+
+<tr>
+<td>attrs<br/><div style="font-size: small;"></div></td>
+<td>dict or list of dict</td>
+<td>no</td>
+<td>none</td>
+<td></td>
+<td>
+    <div>The attributes and values to the RPCs specified by the <em>rpcs</em> option. The value of this option can either be a single dictionary of keywords and values, or a list of dictionaries containing keywords and values.</div>
+    <div>There is a one-to-one correspondence between the elements in the <em>kwargs</em> list and the RPCs in the <em>rpcs</em> list. In other words, the two lists must always contain the same number of elements.</div>
+    </br><div style="font-size: small;">aliases: attr</div>
+</td>
+</tr>
+
+<tr>
+<td>dest<br/><div style="font-size: small;"></div></td>
+<td>path</td>
+<td>no</td>
+<td>None</td>
+<td></td>
+<td>
+    <div>The path to a file, on the Ansible control machine, where the output of the RPC will be saved.</div>
+    <div>The file must be writeable. If the file already exists, it is overwritten.</div>
+    <div>When tasks are executed against more than one target host, one process is forked for each target host. (Up to the maximum specified by the forks configuration. See <a href='http://docs.ansible.com/ansible/latest/intro_configuration.html#forks'>forks</a> for details.) This means that the value of this option must be unique per target host. This is usually accomplished by including <code>{{ inventory_hostname }}</code> in the <em>dest</em> value. It is the user&#x27;s responsibility to ensure this value is unique per target host.</div>
+    <div>For this reason, this option is deprecated. It is maintained for backwards compatibility. Use the <em>dest_dir</em> option in new playbooks. The <em>dest</em> and <em>dest_dir</em> options are mutually exclusive.</div>
+    </br><div style="font-size: small;">aliases: destination</div>
+</td>
+</tr>
+
+<tr>
+<td>dest_dir<br/><div style="font-size: small;"></div></td>
+<td>path</td>
+<td>no</td>
+<td>None</td>
+<td></td>
+<td>
+    <div>The path to a directory, on the Ansible control machine, where the output of the RPC will be saved. The output will be logged to a file named <code>{{ inventory_hostname }}_</code><em>rpc</em>.<em>format</em> in the <em>dest_dir</em> directory.</div>
+    <div>The destination file must be writeable. If the file already exists, it is overwritten. It is the users responsibility to ensure a unique <em>dest_dir</em> value is provided for each execution of this module within a playbook.</div>
+    <div>The <em>dest_dir</em> and <em>dest</em> options are mutually exclusive. The <em>dest_dir</em> option is recommended for all new playbooks.</div>
+    </br><div style="font-size: small;">aliases: destination_dir, destdir</div>
+</td>
+</tr>
+
+<tr>
+<td>filter<br/><div style="font-size: small;"></div></td>
+<td>str</td>
+<td>no</td>
+<td>none</td>
+<td></td>
+<td>
+    <div>This argument only applies if the <em>rpcs</em> option contains a single RPC with the value <code>get-config</code>. When used, this value specifies an XML filter used to restrict the portions of the configuration which are retrieved. See the PyEZ <a href='http://junos-pyez.readthedocs.io/en/stable/jnpr.junos.html#jnpr.junos.rpcmeta._RpcMetaExec.get_config'>get_config method</a> for details on the value of this option.</div>
+    </br><div style="font-size: small;">aliases: filter_xml</div>
+</td>
+</tr>
+
+<tr>
+<td>formats<br/><div style="font-size: small;"></div></td>
+<td>str or list of str</td>
+<td>no</td>
+<td>xml</td>
+<td><ul><li>text</li><li>xml</li><li>json</li></ul></td>
+<td>
+    <div>The format of the reply for the RPCs specified by the <em>rpcs</em> option.</div>
+    <div>The specified format(s) must be supported by the target Junos device.</div>
+    <div>The value of this option can either be a single format, or a list of formats. If a single format is specified, it applies to all RPCs specified by the <em>rpcs</em> option. If a list of formats are specified, there must be one value in the list for each RPC specified by the <em>rpcs</em> option.</div>
+    </br><div style="font-size: small;">aliases: format, display, output</div>
+</td>
+</tr>
+
+<tr>
+<td>ignore_warning<br/><div style="font-size: small;"></div></td>
+<td>bool, str, or list of str</td>
+<td>no</td>
+<td>none</td>
+<td></td>
+<td>
+    <div>A boolean, string or list of strings. If the value is <code>true</code>, ignore all warnings regardless of the warning message. If the value is a string, it will ignore warning(s) if the message of each warning matches the string. If the value is a list of strings, ignore warning(s) if the message of each warning matches at least one of the strings in the list. The value of the <em>ignore_warning</em> option is applied to the load and commit operations performed by this module.</div>
+</td>
+</tr>
+
+<tr>
+<td>kwargs<br/><div style="font-size: small;"></div></td>
+<td>dict or list of dict</td>
+<td>no</td>
+<td>none</td>
+<td></td>
+<td>
+    <div>The keyword arguments and values to the RPCs specified by the <em>rpcs</em> option. The value of this option can either be a single dictionary of keywords and values, or a list of dictionaries containing keywords and values.</div>
+    <div>There must be a one-to-one correspondence between the elements in the <em>kwargs</em> list and the RPCs in the <em>rpcs</em> list. In other words, the two lists must always contain the same number of elements. For RPC arguments which do not require a value, specify the value of True as shown in the :ref:`rpc-examples-label`.</div>
+    </br><div style="font-size: small;">aliases: kwarg, args, arg</div>
+</td>
+</tr>
+
+<tr>
+<td>return_output<br/><div style="font-size: small;"></div></td>
+<td>bool</td>
+<td>no</td>
+<td>True</td>
+<td><ul><li>yes</li><li>no</li></ul></td>
+<td>
+    <div>Indicates if the output of the RPC should be returned in the module&#x27;s response. You might want to set this option to <code>false</code>, and set the <em>dest_dir</em> option, if the RPC output is very large and you only need to save the output rather than using it&#x27;s content in subsequent tasks/plays of your playbook.</div>
+</td>
+</tr>
+
+<tr>
+<td>rpcs<br/><div style="font-size: small;"></div></td>
+<td>list</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+<td>
+    <div>A list of one or more NETCONF RPCs to execute on the Junos device.</div>
+    </br><div style="font-size: small;">aliases: rpc</div>
+</td>
+</tr>
+
+</table>
+</br></div>
+<div class="section" id="common-connection-related-options">
+<h2><a class="toc-backref" href="#id5">Common Connection-related Options</a><a class="headerlink" href="#common-connection-related-options" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the <a class="reference internal" href="#module-specific-options-label"><span class="std std-ref">Module-specific Options</span></a>, the following connection-related options are also supported by this module:</p>
+<table border=1 cellpadding=4>
+
+<tr>
+<th class="head">parameter</th>
+<th class="head">type</th>
+<th class="head">required</th>
+<th class="head">default</th>
+<th class="head">choices</th>
+<th class="head">comments</th>
+</tr>
+
+<tr>
+<td>attempts<br/><div style="font-size: small;"></div></td>
+<td>int</td>
+<td>no</td>
+<td>10</td>
+<td></td>
+<td>
+    <div>The number of times to try connecting and logging in to the Junos device. This option is only applicable when using <code>mode = &#x27;telnet&#x27;</code> or <code>mode = &#x27;serial&#x27;</code>. Mutually exclusive with the <em>console</em> option.</div>
+</td>
+</tr>
+
+<tr>
+<td>baud<br/><div style="font-size: small;"></div></td>
+<td>int</td>
+<td>no</td>
+<td>9600</td>
+<td></td>
+<td>
+    <div>The serial baud rate, in bits per second, used to connect to the Junos device. This option is only applicable when using <code>mode = &#x27;serial&#x27;</code>. Mutually exclusive with the <em>console</em> option.</div>
+</td>
+</tr>
+
+<tr>
+<td>console<br/><div style="font-size: small;"></div></td>
+<td>str</td>
+<td>no</td>
+<td>none</td>
+<td></td>
+<td>
+    <div>An alternate method of specifying a NETCONF over serial console connection to the Junos device using Telnet to a console server. The value of this option must be a string in the format <code>--telnet &lt;console_hostname&gt;,&lt;console_port_number&gt;</code>. This option is deprecated. It is present only for backwards compatibility. The string value of this option is exactly equivalent to specifying <em>host</em> with a value of <code>&lt;console_hostname&gt;</code>, <em>mode</em> with a value of <code>telnet</code>, and <em>port</em> with a value of <code>&lt;console_port_number&gt;</code>. Mutually exclusive with the <em>mode</em>, <em>port</em>, <em>baud</em>, and <em>attempts</em> options.</div>
+</td>
+</tr>
+
+<tr>
+<td>cs_passwd<br/><div style="font-size: small;"></div></td>
+<td>str</td>
+<td>no</td>
+<td></td>
+<td></td>
+<td>
+    <div>The password used to authenticate with the console server over SSH. This option is only required if you want to connect to a device over console using SSH as transport. Mutually exclusive with the <em>console</em> option.</div>
+    </br><div style="font-size: small;">aliases: console_password</div>
+</td>
+</tr>
+
+<tr>
+<td>cs_user<br/><div style="font-size: small;"></div></td>
+<td>str</td>
+<td>no</td>
+<td></td>
+<td></td>
+<td>
+    <div>The username used to authenticate with the console server over SSH. This option is only required if you want to connect to a device over console using SSH as transport. Mutually exclusive with the <em>console</em> option.</div>
+    </br><div style="font-size: small;">aliases: console_username</div>
+</td>
+</tr>
+
+<tr>
+<td>host<br/><div style="font-size: small;"></div></td>
+<td>str</td>
+<td>yes</td>
+<td><code>{{ inventory_hostname }}</code></td>
+<td></td>
+<td>
+    <div>The hostname or IP address of the Junos device to which the connection should be established. This is normally the Junos device itself, but is the hostname or IP address of a console server when connecting to the console of the device by setting the <em>mode</em> option to the value <code>telnet</code>. This option is required, but does not have to be specified explicitly by the user because it defaults to <code>{{ inventory_hostname }}</code>.</div>
+    </br><div style="font-size: small;">aliases: hostname, ip</div>
+</td>
+</tr>
+
+<tr>
+<td>mode<br/><div style="font-size: small;"></div></td>
+<td>str</td>
+<td>no</td>
+<td>none</td>
+<td><ul><li>none</li><li>telnet</li><li>serial</li></ul></td>
+<td>
+    <div>The PyEZ mode used to establish a NETCONF connection to the Junos device. A value of <code>none</code> uses the default NETCONF over SSH mode. Depending on the values of the <em>host</em> and <em>port</em> options, a value of <code>telnet</code> results in either a direct NETCONF over Telnet connection to the Junos device, or a NETCONF over serial console connection to the Junos device using Telnet to a console server. A value of <code>serial</code> results in a NETCONF over serial console connection to the Junos device. Mutually exclusive with the <em>console</em> option.</div>
+</td>
+</tr>
+
+<tr>
+<td>passwd<br/><div style="font-size: small;"></div></td>
+<td>str</td>
+<td>no</td>
+<td>The first defined value from the following list 1) The <code>ANSIBLE_NET_PASSWORD</code> environment variable. (used by Ansible Tower) 2) The value specified using the <code>-k</code> or <code>--ask-pass</code> command line arguments to the <code>ansible</code> or <code>ansible-playbook</code> command. 3) none (An empty password/passphrase)</td>
+<td></td>
+<td>
+    <div>The password, or ssh key&#x27;s passphrase, used to authenticate with the Junos device. If this option is not specified, authentication is attempted using an empty password, or ssh key passphrase.</div>
+    </br><div style="font-size: small;">aliases: password</div>
+</td>
+</tr>
+
+<tr>
+<td>port<br/><div style="font-size: small;"></div></td>
+<td>int or str</td>
+<td>no</td>
+<td><code>830</code> if <code>mode = none</code>, <code>23</code> if <code>mode = &#x27;telnet&#x27;</code>, <code>&#x27;/dev/ttyUSB0&#x27;</code> if (mode = &#x27;serial&#x27;)</td>
+<td></td>
+<td>
+    <div>The TCP port number or serial device port used to establish the connection. Mutually exclusive with the <em>console</em> option.</div>
+</td>
+</tr>
+
+<tr>
+<td rowspan="2">provider<br/><div style="font-size: small;"></div></td>
+<td>dict</td>
+<td>no</td>
+<td></td>
+<td></td>
+<td>
+    <div>An alternative syntax for specifying the connection options. Rather than specifying each connection-related top-level option, the connection-related options may be specified as a dictionary of suboptions to the <em>provider</em> option. All connection-related options must either be specified as top-level options or as suboptions of the <em>provider</em> option. You can not combine the two methods of specifying connection-related options.</div>
+</tr>
+
+<tr>
+<td colspan="5">
+    <table border=1 cellpadding=4>
+    <caption><b>Dictionary object provider</b></caption>
+
+    <tr>
+    <th class="head">parameter</th>
+    <th class="head">type</th>
+    <th class="head">required</th>
+    <th class="head">default</th>
+    <th class="head">choices</th>
+    <th class="head">comments</th>
+    </tr>
+
+    <tr>
+    <td>attempts<br/><div style="font-size: small;"></div></td>
+    <td>int</td>
+    <td>no</td>
+    <td>10</td>
+    <td></td>
+    <td>
+        <div>The number of times to try connecting and logging in to the Junos device. This option is only applicable when using <code>mode = &#x27;telnet&#x27;</code> or <code>mode = &#x27;serial&#x27;</code>. Mutually exclusive with the <em>console</em> option.</div>
+    </td>
+    </tr>
+
+    <tr>
+    <td>baud<br/><div style="font-size: small;"></div></td>
+    <td>int</td>
+    <td>no</td>
+    <td>9600</td>
+    <td></td>
+    <td>
+        <div>The serial baud rate, in bits per second, used to connect to the Junos device. This option is only applicable when using <code>mode = &#x27;serial&#x27;</code>. Mutually exclusive with the <em>console</em> option.</div>
+    </td>
+    </tr>
+
+    <tr>
+    <td>console<br/><div style="font-size: small;"></div></td>
+    <td>str</td>
+    <td>no</td>
+    <td>none</td>
+    <td></td>
+    <td>
+        <div>An alternate method of specifying a NETCONF over serial console connection to the Junos device using Telnet to a console server. The value of this option must be a string in the format <code>--telnet &lt;console_hostname&gt;,&lt;console_port_number&gt;</code>. This option is deprecated. It is present only for backwards compatibility. The string value of this option is exactly equivalent to specifying <em>host</em> with a value of <code>&lt;console_hostname&gt;</code>, <em>mode</em> with a value of <code>telnet</code>, and <em>port</em> with a value of <code>&lt;console_port_number&gt;</code>. Mutually exclusive with the <em>mode</em>, <em>port</em>, <em>baud</em>, and <em>attempts</em> options.</div>
+    </td>
+    </tr>
+
+    <tr>
+    <td>host<br/><div style="font-size: small;"></div></td>
+    <td>str</td>
+    <td>yes</td>
+    <td><code>{{ inventory_hostname }}</code></td>
+    <td></td>
+    <td>
+        <div>The hostname or IP address of the Junos device to which the connection should be established. This is normally the Junos device itself, but is the hostname or IP address of a console server when connecting to the console of the device by setting the <em>mode</em> option to the value <code>telnet</code>. This option is required, but does not have to be specified explicitly by the user because it defaults to <code>{{ inventory_hostname }}</code>.</div>
+    </td>
+    </tr>
+
+    <tr>
+    <td>mode<br/><div style="font-size: small;"></div></td>
+    <td>str</td>
+    <td>no</td>
+    <td>none</td>
+    <td><ul><li>none</li><li>telnet</li><li>serial</li></ul></td>
+    <td>
+        <div>The PyEZ mode used to establish a NETCONF connection to the Junos device. A value of <code>none</code> uses the default NETCONF over SSH mode. Depending on the values of the <em>host</em> and <em>port</em> options, a value of <code>telnet</code> results in either a direct NETCONF over Telnet connection to the Junos device, or a NETCONF over serial console connection to the Junos device using Telnet to a console server. A value of <code>serial</code> results in a NETCONF over serial console connection to the Junos device. Mutually exclusive with the <em>console</em> option.</div>
+    </td>
+    </tr>
+
+    <tr>
+    <td>passwd<br/><div style="font-size: small;"></div></td>
+    <td>str</td>
+    <td>no</td>
+    <td>The first defined value from the following list 1) The <code>ANSIBLE_NET_PASSWORD</code> environment variable. (used by Ansible Tower) 2) The value specified using the <code>-k</code> or <code>--ask-pass</code> command line arguments to the <code>ansible</code> or <code>ansible-playbook</code> command. 3) none (An empty password/passphrase)</td>
+    <td></td>
+    <td>
+        <div>The password, or ssh key&#x27;s passphrase, used to authenticate with the Junos device. If this option is not specified, authentication is attempted using an empty password, or ssh key passphrase.</div>
+    </td>
+    </tr>
+
+    <tr>
+    <td>port<br/><div style="font-size: small;"></div></td>
+    <td>int or str</td>
+    <td>no</td>
+    <td><code>830</code> if <code>mode = none</code>, <code>23</code> if <code>mode = &#x27;telnet&#x27;</code>, <code>&#x27;/dev/ttyUSB0&#x27;</code> if (mode = &#x27;serial&#x27;)</td>
+    <td></td>
+    <td>
+        <div>The TCP port number or serial device port used to establish the connection. Mutually exclusive with the <em>console</em> option.</div>
+    </td>
+    </tr>
+
+    <tr>
+    <td>ssh_private_key_file<br/><div style="font-size: small;"></div></td>
+    <td>path</td>
+    <td>no</td>
+    <td>The first defined value from the following list 1) The <code>ANSIBLE_NET_SSH_KEYFILE</code> environment variable. (used by Ansible Tower) 2) The value specified using the <code>--private-key</code> or <code>--key-file</code> command line arguments to the <code>ansible</code> or <code>ansible-playbook</code> command. 3) none (the file specified in the user&#x27;s SSH configuration, or the operating-system-specific default)</td>
+    <td></td>
+    <td>
+        <div>The path to the SSH private key file used to authenticate with the Junos device. If this option is not specified, and no default value is found using the algorithm below, then the SSH private key file specified in the user&#x27;s SSH configuration, or the operating-system-specific default is used.</div>
+        <div>This must be in the RSA PEM format, and not the newer OPENSSH format. To check if the private key is in the correct format, issue the command `head -n1 ~/.ssh/some_private_key` and ensure that it&#x27;s RSA and not OPENSSH. To create a key in the RSA PEM format, issue the command `ssh-keygen -m PEM -t rsa -b 4096`. To convert an OPENSSH key to an RSA key, issue the command `ssh-keygen -p -m PEM -f ~/.ssh/some_private_key`</div>
+    </td>
+    </tr>
+
+    <tr>
+    <td>ssh_config<br/><div style="font-size: small;"></div></td>
+    <td>path</td>
+    <td>no</td>
+    <td></td>
+    <td></td>
+    <td>
+        <div>The path to the SSH client configuration file. If this option is not specified, then the PyEZ Device instance by default queries file ~/.ssh/config.</div>
+    </td>
+    </tr>
+
+    <tr>
+    <td>timeout<br/><div style="font-size: small;"></div></td>
+    <td>int</td>
+    <td>no</td>
+    <td>30</td>
+    <td></td>
+    <td>
+        <div>The maximum number of seconds to wait for RPC responses from the Junos device. This option does NOT control the initial connection timeout value.</div>
+    </td>
+    </tr>
+
+    <tr>
+    <td>user<br/><div style="font-size: small;"></div></td>
+    <td>str</td>
+    <td>yes</td>
+    <td>The first defined value from the following list 1) The <code>ANSIBLE_NET_USERNAME</code> environment variable. (used by Ansible Tower) 2) The <code>remote_user</code> as defined by Ansible. Ansible sets this value via several methods including a) <code>-u</code> or <code>--user</code> command line arguments to the <code>ansible</code> or <code>ansible-playbook</code> command. b) <code>ANSIBLE_REMOTE_USER</code> environment variable. c) <code>remote_user</code> configuration setting. See the Ansible documentation for the precedence used to set the <code>remote_user</code> value. 3) The <code>USER</code> environment variable.</td>
+    <td></td>
+    <td>
+        <div>The username used to authenticate with the Junos device. This option is required, but does not have to be specified explicitly by the user due to the algorithm for determining the default value.</div>
+    </td>
+    </tr>
+
+    <tr>
+    <td>cs_user<br/><div style="font-size: small;"></div></td>
+    <td>str</td>
+    <td>no</td>
+    <td></td>
+    <td></td>
+    <td>
+        <div>The username used to authenticate with the console server over SSH. This option is only required if you want to connect to a device over console using SSH as transport. Mutually exclusive with the <em>console</em> option.</div>
+    </td>
+    </tr>
+
+    <tr>
+    <td>cs_passwd<br/><div style="font-size: small;"></div></td>
+    <td>str</td>
+    <td>no</td>
+    <td></td>
+    <td></td>
+    <td>
+        <div>The password used to authenticate with the console server over SSH. This option is only required if you want to connect to a device over console using SSH as transport. Mutually exclusive with the <em>console</em> option.</div>
+    </td>
+    </tr>
+
+    </table>
+
+</td>
+</tr>
+</td>
+</tr>
+
+<tr>
+<td>ssh_config<br/><div style="font-size: small;"></div></td>
+<td>path</td>
+<td>no</td>
+<td></td>
+<td></td>
+<td>
+    <div>The path to the SSH client configuration file. If this option is not specified, then the PyEZ Device instance by default queries file ~/.ssh/config.</div>
+</td>
+</tr>
+
+<tr>
+<td>ssh_private_key_file<br/><div style="font-size: small;"></div></td>
+<td>path</td>
+<td>no</td>
+<td>The first defined value from the following list 1) The <code>ANSIBLE_NET_SSH_KEYFILE</code> environment variable. (used by Ansible Tower) 2) The value specified using the <code>--private-key</code> or <code>--key-file</code> command line arguments to the <code>ansible</code> or <code>ansible-playbook</code> command. 3) none (the file specified in the user&#x27;s SSH configuration, or the operating-system-specific default)</td>
+<td></td>
+<td>
+    <div>The path to the SSH private key file used to authenticate with the Junos device. If this option is not specified, and no default value is found using the algorithm below, then the SSH private key file specified in the user&#x27;s SSH configuration, or the operating-system-specific default is used.</div>
+    <div>This must be in the RSA PEM format, and not the newer OPENSSH format. To check if the private key is in the correct format, issue the command `head -n1 ~/.ssh/some_private_key` and ensure that it&#x27;s RSA and not OPENSSH. To create a key in the RSA PEM format, issue the command `ssh-keygen -m PEM -t rsa -b 4096`. To convert an OPENSSH key to an RSA key, issue the command `ssh-keygen -p -m PEM -f ~/.ssh/some_private_key`</div>
+    </br><div style="font-size: small;">aliases: ssh_keyfile</div>
+</td>
+</tr>
+
+<tr>
+<td>timeout<br/><div style="font-size: small;"></div></td>
+<td>int</td>
+<td>no</td>
+<td>30</td>
+<td></td>
+<td>
+    <div>The maximum number of seconds to wait for RPC responses from the Junos device. This option does NOT control the initial connection timeout value.</div>
+</td>
+</tr>
+
+<tr>
+<td>user<br/><div style="font-size: small;"></div></td>
+<td>str</td>
+<td>yes</td>
+<td>The first defined value from the following list 1) The <code>ANSIBLE_NET_USERNAME</code> environment variable. (used by Ansible Tower) 2) The <code>remote_user</code> as defined by Ansible. Ansible sets this value via several methods including a) <code>-u</code> or <code>--user</code> command line arguments to the <code>ansible</code> or <code>ansible-playbook</code> command. b) <code>ANSIBLE_REMOTE_USER</code> environment variable. c) <code>remote_user</code> configuration setting. See the Ansible documentation for the precedence used to set the <code>remote_user</code> value. 3) The <code>USER</code> environment variable.</td>
+<td></td>
+<td>
+    <div>The username used to authenticate with the Junos device. This option is required, but does not have to be specified explicitly by the user due to the algorithm for determining the default value.</div>
+    </br><div style="font-size: small;">aliases: username</div>
+</td>
+</tr>
+
+</table>
+</br></div>
+<div class="section" id="common-logging-related-options">
+<h2><a class="toc-backref" href="#id6">Common Logging-related Options</a><a class="headerlink" href="#common-logging-related-options" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the <a class="reference internal" href="#module-specific-options-label"><span class="std std-ref">Module-specific Options</span></a>, the following logging-related options are also supported by this module:</p>
+<table border=1 cellpadding=4>
+
+<tr>
+<th class="head">parameter</th>
+<th class="head">type</th>
+<th class="head">required</th>
+<th class="head">default</th>
+<th class="head">choices</th>
+<th class="head">comments</th>
+</tr>
+
+<tr>
+<td>level<br/><div style="font-size: small;"></div></td>
+<td>str</td>
+<td>no</td>
+<td>WARNING</td>
+<td><ul><li>INFO</li><li>DEBUG</li></ul></td>
+<td>
+    <div>The level of information to be logged can be modified using this option</div>
+    <div>1) By default, messages at level <code>WARNING</code> or higher are logged.</div>
+    <div>2) If the <code>-v</code> or <code>--verbose</code> command-line options to the <code>ansible-playbook</code> command are specified, messages at level <code>INFO</code> or higher are logged.</div>
+    <div>3) If the <code>-vv</code> (or more verbose) command-line option to the <code>ansible-playbook</code> command is specified, or the <code>ANSIBLE_DEBUG</code> environment variable is set, then messages at level <code>DEBUG</code> or higher are logged.</div>
+    <div>4) If <code>level</code> is mentioned then messages at level <code>level</code> or more are logged.</div>
+</td>
+</tr>
+
+<tr>
+<td>logdir<br/><div style="font-size: small;"></div></td>
+<td>path</td>
+<td>no</td>
+<td>none</td>
+<td></td>
+<td>
+    <div>The path to a directory, on the Ansible control machine, where debugging information for the particular task is logged.</div>
+    <div>If this option is specified, debugging information is logged to a file named <code>{{ inventory_hostname }}.log</code> in the directory specified by the <em>logdir</em> option.</div>
+    <div>The log file must be writeable. If the file already exists, it is appended. It is the users responsibility to delete/rotate log files.</div>
+    <div>The level of information logged in this file is controlled by Ansible&#x27;s verbosity, debug options and level option in task</div>
+    <div>1) By default, messages at level <code>WARNING</code> or higher are logged.</div>
+    <div>2) If the <code>-v</code> or <code>--verbose</code> command-line options to the <code>ansible-playbook</code> command are specified, messages at level <code>INFO</code> or higher are logged.</div>
+    <div>3) If the <code>-vv</code> (or more verbose) command-line option to the <code>ansible-playbook</code> command is specified, or the <code>ANSIBLE_DEBUG</code> environment variable is set, then messages at level <code>DEBUG</code> or higher are logged.</div>
+    <div>4) If <code>level</code> is mentioned then messages at level <code>level</code> or more are logged.</div>
+    <div>The <em>logfile</em> and <em>logdir</em> options are mutually exclusive. The <em>logdir</em> option is recommended for all new playbooks.</div>
+    </br><div style="font-size: small;">aliases: log_dir</div>
+</td>
+</tr>
+
+<tr>
+<td>logfile<br/><div style="font-size: small;"></div></td>
+<td>path</td>
+<td>no</td>
+<td>none</td>
+<td></td>
+<td>
+    <div>The path to a file, on the Ansible control machine, where debugging information for the particular task is logged.</div>
+    <div>The log file must be writeable. If the file already exists, it is appended. It is the users responsibility to delete/rotate log files.</div>
+    <div>The level of information logged in this file is controlled by Ansible&#x27;s verbosity, debug options and level option in task</div>
+    <div>1) By default, messages at level <code>WARNING</code> or higher are logged.</div>
+    <div>2) If the <code>-v</code> or <code>--verbose</code> command-line options to the <code>ansible-playbook</code> command are specified, messages at level <code>INFO</code> or higher are logged.</div>
+    <div>3) If the <code>-vv</code> (or more verbose) command-line option to the <code>ansible-playbook</code> command is specified, or the <code>ANSIBLE_DEBUG</code> environment variable is set, then messages at level <code>DEBUG</code> or higher are logged.</div>
+    <div>4) If <code>level</code> is mentioned then messages at level <code>level</code> or more are logged.</div>
+    <div>When tasks are executed against more than one target host, one process is forked for each target host. (Up to the maximum specified by the forks configuration. See <a href='http://docs.ansible.com/ansible/latest/intro_configuration.html#forks'>forks</a> for details.) This means that the value of this option must be unique per target host. This is usually accomplished by including <code>{{ inventory_hostname }}</code> in the <em>logfile</em> value. It is the user&#x27;s responsibility to ensure this value is unique per target host.</div>
+    <div>For this reason, this option is deprecated. It is maintained for backwards compatibility. Use the <em>logdir</em> option in new playbooks. The <em>logfile</em> and <em>logdir</em> options are mutually exclusive.</div>
+    </br><div style="font-size: small;">aliases: log_file</div>
+</td>
+</tr>
+
+</table>
+</br></div>
+<div class="section" id="examples">
+<span id="rpc-examples-label"></span><h2><a class="toc-backref" href="#id7">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">---</span>
+<span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;Explicit host argument&#39;</span>
+  <span class="n">hosts</span><span class="p">:</span> <span class="n">junos</span>
+  <span class="n">connection</span><span class="p">:</span> <span class="n">local</span>
+  <span class="n">gather_facts</span><span class="p">:</span> <span class="n">no</span>
+  <span class="n">collections</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">juniper</span><span class="o">.</span><span class="n">device</span>
+
+  <span class="n">tasks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Execute RPC with filters&quot;</span>
+      <span class="n">rpc</span><span class="p">:</span>
+        <span class="n">rpcs</span><span class="p">:</span>
+           <span class="o">-</span> <span class="s2">&quot;get-config&quot;</span>
+        <span class="nb">format</span><span class="p">:</span> <span class="n">xml</span>
+        <span class="nb">filter</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">configuration</span><span class="o">&gt;&lt;</span><span class="n">groups</span><span class="o">&gt;&lt;</span><span class="n">name</span><span class="o">&gt;</span><span class="n">re0</span><span class="o">&lt;/</span><span class="n">name</span><span class="o">&gt;&lt;/</span><span class="n">groups</span><span class="o">&gt;&lt;/</span><span class="n">configuration</span><span class="o">&gt;</span>
+        <span class="n">attr</span><span class="p">:</span> <span class="n">name</span><span class="o">=</span><span class="n">re0</span>
+      <span class="n">register</span><span class="p">:</span> <span class="n">test1</span>
+      <span class="n">ignore_errors</span><span class="p">:</span> <span class="kc">True</span>
+
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Check</span> <span class="n">TEST</span> <span class="mi">1</span>
+      <span class="n">debug</span><span class="p">:</span>
+        <span class="n">var</span><span class="p">:</span> <span class="n">test1</span>
+
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Execute RPC with host data and store logging&quot;</span>
+      <span class="n">rpc</span><span class="p">:</span>
+        <span class="n">host</span><span class="p">:</span> <span class="s2">&quot;10.x.x.x&quot;</span>
+        <span class="n">user</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span>
+        <span class="n">passwd</span><span class="p">:</span> <span class="s2">&quot;user123&quot;</span>
+        <span class="n">port</span><span class="p">:</span> <span class="s2">&quot;22&quot;</span>
+        <span class="n">rpcs</span><span class="p">:</span>
+          <span class="o">-</span> <span class="s2">&quot;get-software-information&quot;</span>
+        <span class="n">logfile</span><span class="p">:</span> <span class="s2">&quot;/var/tmp/rpc.log&quot;</span>
+        <span class="n">ignore_warning</span><span class="p">:</span> <span class="n">true</span>
+      <span class="n">register</span><span class="p">:</span> <span class="n">test1</span>
+      <span class="n">ignore_errors</span><span class="p">:</span> <span class="kc">True</span>
+
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Print results - summary&quot;</span>
+      <span class="n">debug</span><span class="p">:</span>
+        <span class="n">var</span><span class="p">:</span> <span class="n">test1</span><span class="o">.</span><span class="n">stdout_lines</span>
+
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Execute multiple RPC&quot;</span>
+      <span class="n">rpc</span><span class="p">:</span>
+        <span class="n">rpcs</span><span class="p">:</span>
+          <span class="o">-</span> <span class="s2">&quot;get-config&quot;</span>
+          <span class="o">-</span> <span class="s2">&quot;get-software-information&quot;</span>
+
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Get</span> <span class="n">Device</span> <span class="n">Configuration</span> <span class="k">for</span> <span class="n">vlan</span> <span class="o">-</span> <span class="mi">1</span>
+      <span class="n">rpc</span><span class="p">:</span>
+        <span class="n">rpc</span><span class="p">:</span> <span class="s2">&quot;get-config&quot;</span>
+        <span class="n">filter_xml</span><span class="p">:</span> <span class="s2">&quot;&lt;configuration&gt;&lt;vlans/&gt;&lt;/configuration&gt;&quot;</span>
+        <span class="n">dest</span><span class="p">:</span> <span class="s2">&quot;get_config_vlan.conf&quot;</span>
+      <span class="n">register</span><span class="p">:</span> <span class="n">junos</span>
+
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Get</span> <span class="n">interface</span> <span class="n">information</span> <span class="k">with</span> <span class="n">kwargs</span>
+      <span class="n">rpc</span><span class="p">:</span>
+        <span class="n">rpc</span><span class="p">:</span> <span class="n">get</span><span class="o">-</span><span class="n">interface</span><span class="o">-</span><span class="n">information</span>
+        <span class="n">kwargs</span><span class="p">:</span>
+          <span class="n">interface_name</span><span class="p">:</span> <span class="n">em1</span>
+          <span class="n">media</span><span class="p">:</span> <span class="kc">True</span>
+        <span class="nb">format</span><span class="p">:</span> <span class="n">json</span>
+        <span class="n">dest</span><span class="p">:</span> <span class="n">get_interface_information</span><span class="o">.</span><span class="n">conf</span>
+      <span class="n">register</span><span class="p">:</span> <span class="n">junos</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="return-values">
+<h2><a class="toc-backref" href="#id8">Return Values</a><a class="headerlink" href="#return-values" title="Permalink to this headline">¶</a></h2>
+<table border=1 cellpadding=4>
+
+<tr>
+<th class="head">name</th>
+<th class="head">description</th>
+<th class="head">returned</th>
+<th class="head">type</th>
+<th class="head">sample</th>
+</tr>
+
+
+<tr>
+<td>attrs</td>
+<td>
+    <div>The RPC attributes and values from the list of dictionaries in the <em>attrs</em> option. This will be none if no attributes are applied to the RPC.</div>
+</td>
+<td align=center>always</td>
+<td align=center>dict</td>
+<td align=center></td>
+</tr>
+
+<tr>
+<td>changed</td>
+<td>
+    <div>Indicates if the device&#x27;s state has changed. Since this module doesn&#x27;t change the operational or configuration state of the device, the value is always set to <code>false</code>.</div>
+    <div>You could use this module to execute an RPC which changes the operational state of the the device. For example, <code>clear-ospf-neighbor-information</code>. Beware, this module is unable to detect this situation, and will still return a <em>changed</em> value of <code>false</code> in this case.</div>
+</td>
+<td align=center>success</td>
+<td align=center>bool</td>
+<td align=center></td>
+</tr>
+
+<tr>
+<td>failed</td>
+<td>
+    <div>Indicates if the task failed. See the <em>results</em> key for additional details.</div>
+</td>
+<td align=center>always</td>
+<td align=center>bool</td>
+<td align=center></td>
+</tr>
+
+<tr>
+<td>format</td>
+<td>
+    <div>The format of the RPC response from the list of formats in the <em>formats</em> option.</div>
+</td>
+<td align=center>always</td>
+<td align=center>str</td>
+<td align=center></td>
+</tr>
+
+<tr>
+<td>kwargs</td>
+<td>
+    <div>The keyword arguments from the list of dictionaries in the <em>kwargs</em> option. This will be <code>none</code> if no kwargs are applied to the RPC.</div>
+</td>
+<td align=center>always</td>
+<td align=center>dict</td>
+<td align=center></td>
+</tr>
+
+<tr>
+<td>msg</td>
+<td>
+    <div>A human-readable message indicating the result.</div>
+</td>
+<td align=center>always</td>
+<td align=center>str</td>
+<td align=center></td>
+</tr>
+
+<tr>
+<td>parsed_output</td>
+<td>
+    <div>The RPC reply from the Junos device parsed into a JSON datastructure. For XML replies, the response is parsed into JSON using the <a href='https://github.com/Juniper/jxmlease'>jxmlease</a> library. For JSON the response is parsed using the Python <a href='https://docs.python.org/2/library/json.html'>json</a> library.</div>
+    <div>When Ansible converts the jxmlease or native Python data structure into JSON, it does not guarantee that the order of dictionary/object keys are maintained.</div>
+</td>
+<td align=center>when RPC executed successfully, <em>return_output</em> is <code>true</code>, and the RPC format is <code>xml</code> or <code>json</code>.</td>
+<td align=center>dict</td>
+<td align=center></td>
+</tr>
+
+<tr>
+<td>results</td>
+<td>
+    <div>The other keys are returned when a single RPC is specified for the <em>rpcs</em> option. When the value of the <em>rpcs</em> option is a list of RPCs, this key is returned instead. The value of this key is a list of dictionaries. Each element in the list corresponds to the RPCs in the <em>rpcs</em> option. The keys for each element in the list include all of the other keys listed. The <em>failed</em> key indicates if the individual RPC failed. In this case, there is also a top-level <em>failed</em> key. The top-level <em>failed</em> key will have a value of <code>false</code> if ANY of the RPCs ran successfully. In this case, check the value of the <em>failed</em> key for each element in the <em>results</em> list for the results of individual RPCs.</div>
+</td>
+<td align=center>when the <em>rpcs</em> option is a list value.</td>
+<td align=center>list of dict</td>
+<td align=center></td>
+</tr>
+
+<tr>
+<td>rpc</td>
+<td>
+    <div>The RPC which was executed from the list of RPCs in the <em>rpcs</em> option.</div>
+</td>
+<td align=center>always</td>
+<td align=center>str</td>
+<td align=center></td>
+</tr>
+
+<tr>
+<td>stdout</td>
+<td>
+    <div>The RPC reply from the Junos device as a single multi-line string.</div>
+</td>
+<td align=center>when RPC executed successfully and <em>return_output</em> is <code>true</code>.</td>
+<td align=center>str</td>
+<td align=center></td>
+</tr>
+
+<tr>
+<td>stdout_lines</td>
+<td>
+    <div>The RPC reply from the Junos device as a list of single-line strings.</div>
+</td>
+<td align=center>when RPC executed successfully and <em>return_output</em> is <code>true</code>.</td>
+<td align=center>list of str</td>
+<td align=center></td>
+</tr>
+
+</table>
+</br>
+</br></div>
+<div class="section" id="notes">
+<h2><a class="toc-backref" href="#id9">Notes</a><a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>The NETCONF system service must be enabled on the target Junos device.</p></li>
+</ul>
+</div>
+<div class="section" id="author">
+<h3><a class="toc-backref" href="#id10">Author</a><a class="headerlink" href="#author" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Juniper Networks - Stacy Smith (&#64;stacywsmith)</p></li>
+</ul>
+</div>
+<div class="section" id="status">
+<h3><a class="toc-backref" href="#id11">Status</a><a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h3>
+<p>This module is flagged as <strong>stableinterface</strong> which means that the maintainers for this module guarantee that no backward incompatible interface changes will be made.</p>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/juniper.png" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">rpc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ping.html">ping</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="ping.html" title="ping"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="juniper.device Ansible Collection Modules"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Junos Ansible Collection Modules 0.1.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">rpc</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014-2017, Juniper Networks, Inc.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
+    </div>
+  </body>
+</html>
