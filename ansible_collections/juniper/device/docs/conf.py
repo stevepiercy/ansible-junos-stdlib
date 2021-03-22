@@ -14,11 +14,11 @@
 
 import sys
 import os
-import sphinx_bootstrap_theme
+# import sphinx_bootstrap_theme
 
 
-def setup(app):
-    app.add_stylesheet("juniper-junos-modules.css")
+# def setup(app):
+#     app.add_stylesheet("juniper-junos-modules.css")
 
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -28,9 +28,9 @@ sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(1, os.path.abspath('..'))
 
 # Import ansible2rst so that RST files can be generated.
-import ansible2rst
+# import ansible2rst
 # Call ansible2rst.main() to generate RST files.
-ansible2rst.main()
+# ansible2rst.main()
 
 # -- General configuration ------------------------------------------------
 
@@ -111,24 +111,25 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'bootstrap'
+# html_theme = 'bootstrap'
+html_theme = 'nature'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
-html_theme_options = {
-    'bootswatch_theme': "spacelab",
-    'navbar_sidebarrel': False,
-    'navbar_site_name': "Modules",    
-    'source_link_position': "footer",
-    'navbar_links': [
-        ("Wiki", "https://techwiki.juniper.net/Automation_Scripting", True),
-        ("Forum", "http://groups.google.com/group/junos-python-ez", True),
-        ],
-    }
+# html_theme_options = {
+#     'bootswatch_theme': "spacelab",
+#     'navbar_sidebarrel': False,
+#     'navbar_site_name': "Modules",
+#     'source_link_position': "footer",
+#     'navbar_links': [
+#         ("Wiki", "https://techwiki.juniper.net/Automation_Scripting", True),
+#         ("Forum", "http://groups.google.com/group/junos-python-ez", True),
+#         ],
+#     }
 
 # Add any paths that contain custom themes here, relative to this directory.
-html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
+# html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
